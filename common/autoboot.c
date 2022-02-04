@@ -293,7 +293,7 @@ const char *bootdelay_process(void)
 	int bootdelay;
 #ifdef CONFIG_BOOTCOUNT_LIMIT
 	unsigned long bootcount = 0;
-	unsigned long bootlimit = 0;
+	unsigned long bootlimit = 5;
 #endif /* CONFIG_BOOTCOUNT_LIMIT */
 
 #ifdef CONFIG_BOOTCOUNT_LIMIT
