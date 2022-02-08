@@ -436,22 +436,26 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
         return CMD_RET_USAGE;
     }
 
-    // if(set_mmc_slot(slot) != 0)
-    // {
-    //     printf("Failed to set SD slot\n");
-    //     return CMD_RET_FAILURE;
-    // }
+    slot = '1';
+
     if(set_mmc_slot(slot) != 0)
     {
-        slot = '1';
-		printf("Failed to set SD slot 0, turning on slot 1\n");
-
-		    if(set_mmc_slot(slot) != 0)
- 				{ 
-					printf("Failed to set SD slot 1 \n");
-					return CMD_RET_FAILURE;
-				}
+        printf("Failed to set SD slot\n");
+        return CMD_RET_FAILURE;
     }
+
+
+    // if(set_mmc_slot(slot) != 0)
+    // {
+    //     slot = '1';
+	// 	printf("Failed to set SD slot 0, turning on slot 1\n");
+
+	// 	    if(set_mmc_slot(slot) != 0)
+ 	// 			{ 
+	// 				printf("Failed to set SD slot 1 \n");
+	// 				return CMD_RET_FAILURE;
+	// 			}
+    // }
 
     printf("Booting SD card slot has been updated. In order for these changes to take effect, the system must be rebooted\n");
     return CMD_RET_SUCCESS;
