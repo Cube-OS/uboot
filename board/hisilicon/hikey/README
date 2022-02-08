@@ -244,7 +244,7 @@ HI6553 PMIC init
 MMC:   config_sd_carddetect: SD card not present
 HiKey DWMMC: 0, HiKey DWMMC: 1
 Card did not respond to voltage select!
-** Bad device mmc 1 **
+**  1 **
 Using default environment
 
 In:    serial
