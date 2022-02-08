@@ -436,17 +436,6 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
         return CMD_RET_USAGE;
     }
 
-    slot = '1';
-
-    printf("Trying to set SD slot to 0\n");
-	
-    if(set_mmc_slot(slot) != 0)
-    {
-        printf("Failed to set SD slot 1\n");
-        // return CMD_RET_FAILURE;
-    }
-
-
     slot = '0';
 
     printf("Trying to set SD slot to 0\n");
@@ -454,6 +443,17 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
     if(set_mmc_slot(slot) != 0)
     {
         printf("Failed to set SD slot 0\n");
+        // return CMD_RET_FAILURE;
+    }
+
+
+    slot = '1';
+
+    printf("Trying to set SD slot to 1\n");
+
+    if(set_mmc_slot(slot) != 0)
+    {
+        printf("Failed to set SD slot 1\n");
         return CMD_RET_FAILURE;
     }
 
