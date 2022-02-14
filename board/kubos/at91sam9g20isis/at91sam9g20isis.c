@@ -171,12 +171,12 @@ int board_mmc_init(bd_t *bd)
     if(set_mmc_slot(0) !=0)
 #endif
 	{
-		debug("Using default SD card\n");
+		printf("Using default SD card\n");
 		/* Turn on the SD0 power pin - value must be LOW */
 		at91_set_pio_output(AT91_PIO_PORTB, 6, 0);
 	}
 
-	debug("board_mmc_init turn on power pin\r\n");
+	printf("board_mmc_init turn on power pin\r\n");
 
 	return atmel_mci_init((void *)ATMEL_BASE_MCI);
 }
