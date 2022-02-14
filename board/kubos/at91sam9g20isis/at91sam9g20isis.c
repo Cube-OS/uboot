@@ -161,15 +161,15 @@ int set_mmc_slot(uint8_t slot)
 }
 #endif
 
-#ifdef CONFIG_GENERIC_ATMEL_MCI
+// #ifdef CONFIG_GENERIC_ATMEL_MCI
 /* this is a weak define that we are overriding */
 int board_mmc_init(bd_t *bd)
 {
 	at91_mci_hw_init();
 
-#ifdef CONFIG_SD_SWITCH
+// #ifdef CONFIG_SD_SWITCH
     if(set_mmc_slot(0) !=0)
-#endif
+// #endif
 	{
 		printf("Using default SD card\n");
 		/* Turn on the SD0 power pin - value must be LOW */
@@ -180,7 +180,7 @@ int board_mmc_init(bd_t *bd)
 
 	return atmel_mci_init((void *)ATMEL_BASE_MCI);
 }
-#endif
+// #endif
 
 int board_early_init_f(void)
 {
