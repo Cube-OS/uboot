@@ -425,7 +425,7 @@ static int do_mmc_dev(cmd_tbl_t *cmdtp, int flag,
 	return CMD_RET_SUCCESS;
 }
 
-#ifdef CONFIG_SD_SWITCH
+// #ifdef CONFIG_SD_SWITCH
 static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
               int argc, char * const argv[])
 {
@@ -460,7 +460,7 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
     printf("Booting SD card slot has been updated. In order for these changes to take effect, the system must be rebooted\n");
     return CMD_RET_SUCCESS;
 }
-#endif
+// #endif
 
 static int do_mmc_list(cmd_tbl_t *cmdtp, int flag,
 		       int argc, char * const argv[])

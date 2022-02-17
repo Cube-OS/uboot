@@ -83,7 +83,7 @@ void hw_watchdog_force(void)
 }
 #endif /* CONFIG_HW_WATCHDOG */
 
-#ifdef CONFIG_SD_SWITCH
+// #ifdef CONFIG_SD_SWITCH
 int set_mmc_slot(uint8_t slot)
 {
     /*
@@ -168,17 +168,17 @@ int set_mmc_slot(uint8_t slot)
 
     return status;
 }
-#endif
+// #endif
 
-#ifdef CONFIG_GENERIC_ATMEL_MCI
+// #ifdef CONFIG_GENERIC_ATMEL_MCI
 /* this is a weak define that we are overriding */
 int board_mmc_init(bd_t *bd)
 {
 	at91_mci_hw_init();
 
-#ifdef CONFIG_SD_SWITCH
+// #ifdef CONFIG_SD_SWITCH
     if(set_mmc_slot(0) !=0)
-#endif
+// #endif
 	{
 		printf("Using default SD card\n");
 		/* Turn on the SD0 power pin - value must be LOW */
@@ -189,7 +189,7 @@ int board_mmc_init(bd_t *bd)
 
 	return atmel_mci_init((void *)ATMEL_BASE_MCI);
 }
-#endif
+// #endif
 
 int board_early_init_f(void)
 {
@@ -211,10 +211,10 @@ int board_init(void)
 	hw_watchdog_init();
 #endif
 
-#if defined(CONFIG_CMD_SPI) && defined(CONFIG_SD_SWITCH)
+// #if defined(CONFIG_CMD_SPI) && defined(CONFIG_SD_SWITCH)
 	/* Enable SPI bus 0 and CS 0 */
 	at91_spi0_hw_init(1 << 0);
-#endif
+// #endif
 
 	return 0;
 }
@@ -248,7 +248,7 @@ int board_eth_init(bd_t *bis)
 
 
 /* SPI chip select control */
-#ifdef CONFIG_ATMEL_SPI
+// #ifdef CONFIG_ATMEL_SPI
 #include <spi.h>
 int spi_cs_is_valid(unsigned int bus, unsigned int cs)
 {
@@ -284,5 +284,5 @@ void spi_cs_deactivate(struct spi_slave *slave)
 		break;
 	}
 }
-#endif /* CONFIG_ATMEL_SPI */
+// #endif /* CONFIG_ATMEL_SPI */
 
