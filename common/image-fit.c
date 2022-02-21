@@ -1289,6 +1289,7 @@ int fit_check_format(const void *fit)
 {
 	/* mandatory / node 'description' property */
 	if (fdt_getprop(fit, 0, FIT_DESC_PROP, NULL) == NULL) {
+		printf("Wrong FIT format: no description\n");
 		debug("Wrong FIT format: no description\n");
 		return 0;
 	}
@@ -1296,6 +1297,7 @@ int fit_check_format(const void *fit)
 	if (IMAGE_ENABLE_TIMESTAMP) {
 		/* mandatory / node 'timestamp' property */
 		if (fdt_getprop(fit, 0, FIT_TIMESTAMP_PROP, NULL) == NULL) {
+			printf("Wrong FIT format: no timestamp\n");
 			debug("Wrong FIT format: no timestamp\n");
 			return 0;
 		}
@@ -1303,6 +1305,7 @@ int fit_check_format(const void *fit)
 
 	/* mandatory subimages parent '/images' node */
 	if (fdt_path_offset(fit, FIT_IMAGES_PATH) < 0) {
+		printf("Wrong FIT format: no images parent node\n");
 		debug("Wrong FIT format: no images parent node\n");
 		return 0;
 	}
@@ -1362,12 +1365,14 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
 	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
 	if (confs_noffset < 0 || images_noffset < 0) {
+		printf("Can't find configurations or images nodes.\n");
 		debug("Can't find configurations or images nodes.\n");
 		return -1;
 	}
 
 	fdt_compat = fdt_getprop(fdt, 0, "compatible", &fdt_compat_len);
 	if (!fdt_compat) {
+		printf("Fdt for comparison has no \"compatible\" property.\n");
 		debug("Fdt for comparison has no \"compatible\" property.\n");
 		return -1;
 	}
@@ -1391,12 +1396,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 
 		kfdt_name = fdt_getprop(fit, noffset, "fdt", &len);
 		if (!kfdt_name) {
+			printf("No fdt property found.\n");
 			debug("No fdt property found.\n");
 			continue;
 		}
 		kfdt_noffset = fdt_subnode_offset(fit, images_noffset,
 						  kfdt_name);
 		if (kfdt_noffset < 0) {
+			printf("No image node named \"%s\" found.\n",
+			      kfdt_name);
 			debug("No image node named \"%s\" found.\n",
 			      kfdt_name);
 			continue;
@@ -1405,6 +1413,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 		 * Get a pointer to this configuration's fdt.
 		 */
 		if (fit_image_get_data(fit, kfdt_noffset, &kfdt, &size)) {
+			printf("Failed to get fdt \"%s\".\n", kfdt_name);
 			debug("Failed to get fdt \"%s\".\n", kfdt_name);
 			continue;
 		}
@@ -1430,6 +1439,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 		}
 	}
 	if (!best_match_offset) {
+		printf("No match found.\n");
 		debug("No match found.\n");
 		return -1;
 	}
@@ -1462,6 +1472,8 @@ int fit_conf_get_node(const void *fit, const char *conf_uname)
 
 	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
 	if (confs_noffset < 0) {
+		printf("Can't find configurations parent node '%s' (%s)\n",
+		      FIT_CONFS_PATH, fdt_strerror(confs_noffset));
 		debug("Can't find configurations parent node '%s' (%s)\n",
 		      FIT_CONFS_PATH, fdt_strerror(confs_noffset));
 		return confs_noffset;
@@ -1470,6 +1482,8 @@ int fit_conf_get_node(const void *fit, const char *conf_uname)
 	if (conf_uname == NULL) {
 		/* get configuration unit name from the default property */
 		debug("No configuration specified, trying default...\n");
+		printf("No configuration specified, trying default...\n");
+
 		conf_uname = (char *)fdt_getprop(fit, confs_noffset,
 						 FIT_DEFAULT_PROP, &len);
 		if (conf_uname == NULL) {
@@ -1613,20 +1627,20 @@ int fit_get_node_from_config(bootm_headers_t *images, const char *prop_name,
 	void *fit_hdr;
 	int noffset;
 
-	debug("*  %s: using config '%s' from image at 0x%08lx\n",
+	printf("*  %s: using config '%s' from image at 0x%08lx\n",
 	      prop_name, images->fit_uname_cfg, addr);
 
 	/* Check whether configuration has this property defined */
 	fit_hdr = map_sysmem(addr, 0);
 	cfg_noffset = fit_conf_get_node(fit_hdr, images->fit_uname_cfg);
 	if (cfg_noffset < 0) {
-		debug("*  %s: no such config\n", prop_name);
+		printf("*  %s: no such config\n", prop_name);
 		return -EINVAL;
 	}
 
 	noffset = fit_conf_get_prop_node(fit_hdr, cfg_noffset, prop_name);
 	if (noffset < 0) {
-		debug("*  %s: no '%s' in config\n", prop_name, prop_name);
+		printf("*  %s: no '%s' in config\n", prop_name, prop_name);
 		return -ENOENT;
 	}
 
