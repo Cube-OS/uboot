@@ -1289,7 +1289,7 @@ int fit_check_format(const void *fit)
 {
 	/* mandatory / node 'description' property */
 	if (fdt_getprop(fit, 0, FIT_DESC_PROP, NULL) == NULL) {
-		printf("Wrong FIT format: no description\n");
+		// printf("Wrong FIT format: no description\n");
 		debug("Wrong FIT format: no description\n");
 		return 0;
 	}
@@ -1297,7 +1297,7 @@ int fit_check_format(const void *fit)
 	if (IMAGE_ENABLE_TIMESTAMP) {
 		/* mandatory / node 'timestamp' property */
 		if (fdt_getprop(fit, 0, FIT_TIMESTAMP_PROP, NULL) == NULL) {
-			printf("Wrong FIT format: no timestamp\n");
+			// printf("Wrong FIT format: no timestamp\n");
 			debug("Wrong FIT format: no timestamp\n");
 			return 0;
 		}
@@ -1305,7 +1305,7 @@ int fit_check_format(const void *fit)
 
 	/* mandatory subimages parent '/images' node */
 	if (fdt_path_offset(fit, FIT_IMAGES_PATH) < 0) {
-		printf("Wrong FIT format: no images parent node\n");
+		// printf("Wrong FIT format: no images parent node\n");
 		debug("Wrong FIT format: no images parent node\n");
 		return 0;
 	}
@@ -1372,7 +1372,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 
 	fdt_compat = fdt_getprop(fdt, 0, "compatible", &fdt_compat_len);
 	if (!fdt_compat) {
-		printf("Fdt for comparison has no \"compatible\" property.\n");
+		// printf("Fdt for comparison has no \"compatible\" property.\n");
 		debug("Fdt for comparison has no \"compatible\" property.\n");
 		return -1;
 	}
@@ -1396,15 +1396,15 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 
 		kfdt_name = fdt_getprop(fit, noffset, "fdt", &len);
 		if (!kfdt_name) {
-			printf("No fdt property found.\n");
+			// printf("No fdt property found.\n");
 			debug("No fdt property found.\n");
 			continue;
 		}
 		kfdt_noffset = fdt_subnode_offset(fit, images_noffset,
 						  kfdt_name);
 		if (kfdt_noffset < 0) {
-			printf("No image node named \"%s\" found.\n",
-			      kfdt_name);
+			// printf("No image node named \"%s\" found.\n",
+			//       kfdt_name);
 			debug("No image node named \"%s\" found.\n",
 			      kfdt_name);
 			continue;
@@ -1413,7 +1413,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 		 * Get a pointer to this configuration's fdt.
 		 */
 		if (fit_image_get_data(fit, kfdt_noffset, &kfdt, &size)) {
-			printf("Failed to get fdt \"%s\".\n", kfdt_name);
+			// printf("Failed to get fdt \"%s\".\n", kfdt_name);
 			debug("Failed to get fdt \"%s\".\n", kfdt_name);
 			continue;
 		}
@@ -1439,7 +1439,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
 		}
 	}
 	if (!best_match_offset) {
-		printf("No match found.\n");
+		// printf("No match found.\n");
 		debug("No match found.\n");
 		return -1;
 	}
@@ -1472,8 +1472,8 @@ int fit_conf_get_node(const void *fit, const char *conf_uname)
 
 	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
 	if (confs_noffset < 0) {
-		printf("Can't find configurations parent node '%s' (%s)\n",
-		      FIT_CONFS_PATH, fdt_strerror(confs_noffset));
+		// printf("Can't find configurations parent node '%s' (%s)\n",
+		//       FIT_CONFS_PATH, fdt_strerror(confs_noffset));
 		debug("Can't find configurations parent node '%s' (%s)\n",
 		      FIT_CONFS_PATH, fdt_strerror(confs_noffset));
 		return confs_noffset;
@@ -1482,7 +1482,7 @@ int fit_conf_get_node(const void *fit, const char *conf_uname)
 	if (conf_uname == NULL) {
 		/* get configuration unit name from the default property */
 		debug("No configuration specified, trying default...\n");
-		printf("No configuration specified, trying default...\n");
+		// printf("No configuration specified, trying default...\n");
 
 		conf_uname = (char *)fdt_getprop(fit, confs_noffset,
 						 FIT_DEFAULT_PROP, &len);

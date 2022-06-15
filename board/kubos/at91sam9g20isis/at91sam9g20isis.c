@@ -83,7 +83,7 @@ void hw_watchdog_force(void)
 }
 #endif /* CONFIG_HW_WATCHDOG */
 
-// #ifdef CONFIG_SD_SWITCH
+#ifdef CONFIG_SD_SWITCH
 int set_mmc_slot(uint8_t slot)
 {
     /*
@@ -103,8 +103,6 @@ int set_mmc_slot(uint8_t slot)
         int offset = fdt_next_node(src, fdt_path_offset(src, FIT_IMAGES_PATH), &depth);
 
         printf("\n"); /* Fix the console output formatting */
-       	printf("checking fit format\r\n");
-
 
         if(fit_image_verify(src, offset))
         {
@@ -113,11 +111,9 @@ int set_mmc_slot(uint8_t slot)
         }
         else
         {       	
-            printf("missing Binary image\r\n");
             status = -1;
         }
 
-       	printf("binary image exists\r\n");
         printf("\n"); /* Fix the console output formatting */
     }
     else
@@ -132,8 +128,6 @@ int set_mmc_slot(uint8_t slot)
         int count = 1000;
         void *buf = (void *)CONFIG_STANDALONE_LOAD_ADDR;
         void *from = (void *)data;
-
-        printf("Copy Binary from flash to SDRAM\r\n");
 
         while (count-- > 0) {
             *((u32 *)buf) = *((u32  *)from);
@@ -168,28 +162,28 @@ int set_mmc_slot(uint8_t slot)
 
     return status;
 }
-// #endif
+#endif
 
-// #ifdef CONFIG_GENERIC_ATMEL_MCI
+#ifdef CONFIG_GENERIC_ATMEL_MCI
 /* this is a weak define that we are overriding */
 int board_mmc_init(bd_t *bd)
 {
 	at91_mci_hw_init();
 
-// #ifdef CONFIG_SD_SWITCH
+#ifdef CONFIG_SD_SWITCH
     if(set_mmc_slot(0) !=0)
-// #endif
+#endif
 	{
-		printf("Using default SD card\n");
+		debug("Using default SD card\n");
 		/* Turn on the SD0 power pin - value must be LOW */
 		at91_set_pio_output(AT91_PIO_PORTB, 6, 0);
 	}
 
-	printf("board_mmc_init turn on power pin\r\n");
+	debug("board_mmc_init turn on power pin\r\n");
 
 	return atmel_mci_init((void *)ATMEL_BASE_MCI);
 }
-// #endif
+#endif
 
 int board_early_init_f(void)
 {
@@ -211,10 +205,10 @@ int board_init(void)
 	hw_watchdog_init();
 #endif
 
-// #if defined(CONFIG_CMD_SPI) && defined(CONFIG_SD_SWITCH)
+#if defined(CONFIG_CMD_SPI) && defined(CONFIG_SD_SWITCH)
 	/* Enable SPI bus 0 and CS 0 */
 	at91_spi0_hw_init(1 << 0);
-// #endif
+#endif
 
 	return 0;
 }
@@ -248,7 +242,7 @@ int board_eth_init(bd_t *bis)
 
 
 /* SPI chip select control */
-// #ifdef CONFIG_ATMEL_SPI
+#ifdef CONFIG_ATMEL_SPI
 #include <spi.h>
 int spi_cs_is_valid(unsigned int bus, unsigned int cs)
 {
@@ -284,5 +278,5 @@ void spi_cs_deactivate(struct spi_slave *slave)
 		break;
 	}
 }
-// #endif /* CONFIG_ATMEL_SPI */
+#endif /* CONFIG_ATMEL_SPI */
 

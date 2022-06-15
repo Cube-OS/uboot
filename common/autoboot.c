@@ -291,15 +291,15 @@ const char *bootdelay_process(void)
 {
 	char *s;
 	int bootdelay;
-// #ifdef CONFIG_BOOTCOUNT_LIMIT
+#ifdef CONFIG_BOOTCOUNT_LIMIT
 	unsigned long bootcount = 0;
 	unsigned long bootlimit = 5;
-// #endif /* CONFIG_BOOTCOUNT_LIMIT */
+#endif /* CONFIG_BOOTCOUNT_LIMIT */
 
-// #ifdef CONFIG_BOOTCOUNT_LIMIT
+#ifdef CONFIG_BOOTCOUNT_LIMIT
 	bootcount = bootcount_load();
 	bootlimit = getenv_ulong("bootlimit", 10, 0);
-// #endif /* CONFIG_BOOTCOUNT_LIMIT */
+#endif /* CONFIG_BOOTCOUNT_LIMIT */
 
 	s = getenv("bootdelay");
 	bootdelay = s ? (int)simple_strtol(s, NULL, 10) : CONFIG_BOOTDELAY;
@@ -321,13 +321,13 @@ const char *bootdelay_process(void)
 		s = getenv("failbootcmd");
 	} else
 #endif /* CONFIG_POST */
-// #ifdef CONFIG_BOOTCOUNT_LIMIT
+#ifdef CONFIG_BOOTCOUNT_LIMIT
 	if (bootlimit && (bootcount > bootlimit)) {
 		printf("Warning: Bootlimit (%u) exceeded. Using altbootcmd.\n",
 		       (unsigned)bootlimit);
 		s = getenv("altbootcmd");
 	} else
-// #endif /* CONFIG_BOOTCOUNT_LIMIT */
+#endif /* CONFIG_BOOTCOUNT_LIMIT */
 		s = getenv("bootcmd");
 
 	process_fdt_options(gd->fdt_blob);
@@ -346,13 +346,13 @@ void autoboot_command(const char *s)
 #endif
 
 /* Save the new bootcount if we're actually going to try to boot (vs going to U-Boot shell) */
-// #ifdef CONFIG_BOOTCOUNT_LIMIT
+#ifdef CONFIG_BOOTCOUNT_LIMIT
 		unsigned long bootcount = 0;
 
 		bootcount = bootcount_load();
 		bootcount++;
 		bootcount_store(bootcount);
-// #endif /* CONFIG_BOOTCOUNT_LIMIT */
+#endif /* CONFIG_BOOTCOUNT_LIMIT */
 
 		run_command_list(s, -1, 0);
 
