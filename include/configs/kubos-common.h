@@ -46,7 +46,7 @@
 #define KUBOS_UPDATE_ARGS \
 	"altbootcmd= setenv bootcmd\0 "\ 
 	"recovery_available=0\0" \
-	"saveenv;\0 "\
+	"saveenv\0 "\
 	"cp.b 0x10080000 0x20000000 0x70000\0"\
 	"go 0x20000000\0" \
     "bootlimit=6\0" \
