@@ -45,8 +45,11 @@
 
 #define KUBOS_UPDATE_ARGS \
 	/* "altbootcmd=run bootcmd\0" \ */
-	"altbootcmd= setenv bootcmd; saveenv; cp.b 0x10080000 0x20000000 0x70000; go 0x20000000\0" \
-	"recovery_available=0\0" \
+	"altbootcmd= setenv bootcmd; "\ 
+	"recovery_available=0" \
+	"saveenv; "\
+	"cp.b 0x10080000 0x20000000 0x70000; "\
+	"go 0x20000000\0" \
     "bootlimit=6\0" \
 	KUBOS_CURR_VERSION "=" KUBOS_BASE "\0" \
 	KUBOS_PREV_VERSION "=" KUBOS_BASE "\0" \
