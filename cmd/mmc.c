@@ -455,9 +455,9 @@ static int do_bootlimit_check(void)
 	bootcount = bootcount_load();
 	bootlimit = getenv_ulong("bootlimit", 10, 0);
 
-	printf("Bootcount %s\n",bootcount);
-	printf("Bootlimit %s\n",bootlimit);
-	if bootcount > bootlimit {
+	printf("Bootcount %ld\n",bootcount);
+	printf("Bootlimit %ld\n",bootlimit);
+	if (bootcount > bootlimit) {
 		return CMD_RET_FAILURE;
 	}
 	else {
