@@ -447,7 +447,7 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
 }
 
 static int do_bootlimit_check(cmd_tbl_t *cmdtp, int flag,
-			 int argc, char * const argv[]) 
+				int argc, char * const argv[]) 
 {
 	printf("Check bootcount");
 	unsigned long bootcount = 0;
@@ -456,19 +456,20 @@ static int do_bootlimit_check(cmd_tbl_t *cmdtp, int flag,
 	bootcount = bootcount_load();
 	bootlimit = getenv_ulong("bootlimit", 10, 0);
 
-	printf("Bootcount %ld\n",bootcount);
-	printf("Bootlimit %ld\n",bootlimit);
-	if (bootcount > bootlimit) {
+	// printf("Bootcount %ld\n",bootcount);
+	// printf("Bootlimit %ld\n",bootlimit);
+	if (bootcount > bootlimit)
+	{
 		return CMD_RET_FAILURE;
 	}
 	else {
-		return CMD_RET_SUCCESS;
+		return CMD_RET_SUCCESS;		
 	}
 }
 #endif
 
 static int do_mmc_list(cmd_tbl_t *cmdtp, int flag,
-		       int argc, char * const argv[])
+		    	int argc, char * const argv[])
 {
 	print_mmc_devices('\n');
 	return CMD_RET_SUCCESS;
