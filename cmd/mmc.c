@@ -793,7 +793,7 @@ static cmd_tbl_t cmd_mmc[] = {
 	U_BOOT_CMD_MKENT(setdsr, 2, 0, do_mmc_setdsr, "", ""),
 #ifdef CONFIG_SD_SWITCH
 	U_BOOT_CMD_MKENT(slot, 2, 0, do_mmc_slot, "", ""),
-	U_BOOT_CMD_MKENT(bootlimitcheck, 0, 0, do_bootlimit_check, "", "")
+	U_BOOT_CMD_MKENT(bootlimitcheck, 0, 0, do_bootlimit_check, "", ""),
 #endif
 };
 
