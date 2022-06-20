@@ -448,7 +448,7 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
 
 static int do_bootlimit_check(void) 
 {
-	printf("Check bootcount")
+	printf("Check bootcount");
 	unsigned long bootcount = 0;
 	unsigned long bootlimit = 0;
 	
