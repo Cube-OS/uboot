@@ -456,8 +456,8 @@ static int do_bootlimit_check(cmd_tbl_t *cmdtp, int flag,
 	bootcount = bootcount_load();
 	bootlimit = getenv_ulong("bootlimit", 10, 0);
 
-	// printf("Bootcount %ld\n",bootcount);
-	// printf("Bootlimit %ld\n",bootlimit);
+	/*printf("Bootcount %ld\n",bootcount);
+	printf("Bootlimit %ld\n",bootlimit);*/
 	if (bootcount > bootlimit) {
 		return CMD_RET_FAILURE;
 	}
@@ -794,7 +794,7 @@ static cmd_tbl_t cmd_mmc[] = {
 	U_BOOT_CMD_MKENT(setdsr, 2, 0, do_mmc_setdsr, "", ""),
 #ifdef CONFIG_SD_SWITCH
 	U_BOOT_CMD_MKENT(slot, 2, 0, do_mmc_slot, "", ""),
-	U_BOOT_CMD_MKENT(bootlimitcheck, 0, 0, do_bootlimit_check, "", ""),
+	U_BOOT_CMD_MKENT(bootlimitcheck, 1, 0, do_bootlimit_check, "", ""),
 #endif
 };
 
@@ -825,7 +825,7 @@ static int do_mmcops(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 }
 
 U_BOOT_CMD(
-	mmc, 30, 1, do_mmcops,
+	mmc, 29, 1, do_mmcops,
 	"MMC sub system",
 	"info - display info of the current MMC device\n"
 	"mmc read addr blk# cnt\n"
