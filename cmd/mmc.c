@@ -449,7 +449,7 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
 static int do_bootlimit_check(cmd_tbl_t *cmdtp, int flag,
 				int argc, char * const argv[]) 
 {
-	printf("Check bootcount");
+	printf("Check bootcount\n");
 	unsigned long bootcount = 0;
 	unsigned long bootlimit = 0;
 	
@@ -825,7 +825,7 @@ static int do_mmcops(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 }
 
 U_BOOT_CMD(
-	mmc, 29, 1, do_mmcops,
+	mmc, 30, 1, do_mmcops,
 	"MMC sub system",
 	"info - display info of the current MMC device\n"
 	"mmc read addr blk# cnt\n"
