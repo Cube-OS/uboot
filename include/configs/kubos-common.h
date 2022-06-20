@@ -44,17 +44,14 @@
 #define KUBOS_UPDATE_FILE  "kubos_updatefile"
 
 #define KUBOS_UPDATE_ARGS \
-	"altbootcmd= setenv bootcmd\0 "\ 
-	"recovery_available=0\0" \
-	"saveenv\0 "\
-	"cp.b 0x10080000 0x20000000 0x70000\0"\
-	"go 0x20000000\0" \
+    "altbootcmd=run bootcmd\0" \
+    "recovery_available=1\0" \
     "bootlimit=6\0" \
-	KUBOS_CURR_VERSION "=" KUBOS_BASE "\0" \
-	KUBOS_PREV_VERSION "=" KUBOS_BASE "\0" \
-	KUBOS_CURR_TRIED "=0\0" \
-	DFU_ALT_INFO_MMC \
-	DFU_ALT_INFO_NOR
+    KUBOS_CURR_VERSION "=" KUBOS_BASE "\0" \
+    KUBOS_PREV_VERSION "=" KUBOS_BASE "\0" \
+    KUBOS_CURR_TRIED "=0\0" \
+    DFU_ALT_INFO_MMC \
+    DFU_ALT_INFO_NOR
 #else
 
 #define KUBOS_UPDATE_ARGS ""

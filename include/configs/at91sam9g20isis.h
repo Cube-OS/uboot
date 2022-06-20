@@ -194,10 +194,8 @@
 
 #ifdef CONFIG_SD_SWITCH
 #define CONFIG_BOOTCOMMAND \
-	"if mmc rescan; then " \
-		"run mmc_boot; " \
-	"else " \
-		"mmc slot 0; " \
+	"mmc slot 0; " \
+	"if mmc bootlimitcheck; then " \
 		"if mmc rescan; then " \
 			"run mmc_boot; " \
 		"else " \
@@ -208,7 +206,14 @@
 				"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
 			"fi; " \
 		"fi; " \
-	"fi;"
+	"else " \
+		"mmc slot 1; " \
+		"if mmc rescan; then " \
+			"run mmc_boot; " \
+		"else " \
+			"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
+		"fi; " \
+	"fi; " \
 #else
 #define CONFIG_BOOTCOMMAND	\
 	"if mmc rescan; then " \
