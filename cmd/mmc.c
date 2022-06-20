@@ -446,7 +446,8 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
     return CMD_RET_SUCCESS;
 }
 
-static int do_bootlimit_check(void) 
+static int do_bootlimit_check(cmd_tbl_t *cmdtp, int flag,
+			 int argc, char * const argv[]) 
 {
 	printf("Check bootcount");
 	unsigned long bootcount = 0;
@@ -861,6 +862,7 @@ U_BOOT_CMD(
 	"mmc setdsr <value> - set DSR register value\n"
 #ifdef CONFIG_SD_SWITCH
 	"mmc slot <0|1> - set SD slot to boot from (requires reboot)\n"
+	"mmc bootlimitcheck - check if bootcount exceeds bootlimit"
 #endif
 	);
 
