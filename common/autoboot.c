@@ -316,18 +316,18 @@ const char *bootdelay_process(void)
 #endif
 	bootretry_init_cmd_timeout();
 
-#ifdef CONFIG_POST
+/* #ifdef CONFIG_POST
 	if (gd->flags & GD_FLG_POSTFAIL) {
 		s = getenv("failbootcmd");
 	}
-#endif /* CONFIG_POST */
-// #ifdef CONFIG_BOOTCOUNT_LIMIT
-	/*if (bootlimit && (bootcount > bootlimit)) {
+#endif  CONFIG_POST */
+/*#ifdef CONFIG_BOOTCOUNT_LIMIT
+	if (bootlimit && (bootcount > bootlimit)) {
 		printf("Warning: Bootlimit (%u) exceeded. Using altbootcmd.\n",
 		       (unsigned)bootlimit);
 		s = getenv("altbootcmd");
 	} else
-// #endif /* CONFIG_BOOTCOUNT_LIMIT */
+ #endif /* CONFIG_BOOTCOUNT_LIMIT */
 	s = getenv("bootcmd");
 
 	printf("bootcmd = %s\n",s);

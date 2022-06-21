@@ -442,7 +442,7 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
         return CMD_RET_FAILURE;
     }
 
-    printf("Booting SD card slot has been updated. In order for these changes to take effect, the system must be rebooted\n");
+    printf("DO_MMC_SLOT Booting SD card slot has been updated. In order for these changes to take effect, the system must be rebooted\n");
     return CMD_RET_SUCCESS;
 }
 
@@ -454,11 +454,15 @@ static int do_bootlimit_check(cmd_tbl_t *cmdtp, int flag,
 	unsigned long bootlimit = 0;
 	
 	bootcount = bootcount_load();
+	// bootcount++;
+	// bootcount_store (bootcount); 
 	bootlimit = getenv_ulong("bootlimit", 10, 0);
 
 	printf("Bootcount %ld\n",bootcount);
 	printf("Bootlimit %ld\n",bootlimit);
 	if (bootcount > bootlimit) {
+		// bootcout = 0;
+		// bootcount_store (bootcount); 
 		return CMD_RET_FAILURE;
 	}
 	else {

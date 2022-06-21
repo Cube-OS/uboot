@@ -201,7 +201,7 @@
 			"if mmc rescan; then " \
 				"run mmc_boot; " \
 			"else " \
-				"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
+				"echo ERROR1: Failed to boot. Unable to communicate with SD card; " \			
 			"fi; " \
 		"fi; " \
 	"else " \
@@ -209,7 +209,7 @@
 		"if mmc rescan; then " \
 			"run mmc_boot; " \
 		"else " \
-			"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
+			"echo ERROR2: Failed to boot. Unable to communicate with SD card; " \
 		"fi; " \
 	"fi; " \
 
@@ -221,7 +221,7 @@
 /* (bootstrap + u-boot + dtb (+ altOS) in flash) + (env + linux in mmc) */
 /* Copy .dtb file (NORFLASH @ 0x70000, size = 0x10000) and kernel (SD card, partition 5) into SDRAM, then boot them */
 #define MMC_BOOT \
-	"mmc_boot=cp.b 0x10070000 0x21800000 0x10000; " \
+	"mmc_boot_flash=cp.b 0x10070000 0x21800000 0x10000; " \
 		"fatload mmc 0:5 0x2187FF58 kernel; " \
 		"bootm 0x2187FF58 - 0x21800000\0"
 
