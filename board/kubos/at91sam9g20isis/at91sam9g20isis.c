@@ -148,14 +148,15 @@ int set_mmc_slot(uint8_t slot)
         /* Go run it */
         char go_cmd[] = "go 0xnnnnnnnn 0xnn\n";
 
-        if(!slot)
+        /*if(!slot)
         {
             sprintf(go_cmd, "go 0x%p\n", (void *)CONFIG_STANDALONE_LOAD_ADDR);
         }
         else
         {
             sprintf(go_cmd, "go 0x%p %s\n", (void *)CONFIG_STANDALONE_LOAD_ADDR, sd_byte);
-        }
+        }*/
+        sprintf(go_cmd, "go 0x%p %s\n", (void *)CONFIG_STANDALONE_LOAD_ADDR, sd_byte);
 
         run_command_list(go_cmd, -1, 0);
     }

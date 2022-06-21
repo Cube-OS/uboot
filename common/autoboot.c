@@ -328,7 +328,7 @@ const char *bootdelay_process(void)
 		s = getenv("altbootcmd");
 	} else
 // #endif /* CONFIG_BOOTCOUNT_LIMIT */
-		s = getenv("bootcmd");
+	s = getenv("bootcmd");
 
 	process_fdt_options(gd->fdt_blob);
 	stored_bootdelay = bootdelay;
