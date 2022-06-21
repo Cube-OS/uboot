@@ -319,7 +319,7 @@ const char *bootdelay_process(void)
 #ifdef CONFIG_POST
 	if (gd->flags & GD_FLG_POSTFAIL) {
 		s = getenv("failbootcmd");
-	} else
+	}
 #endif /* CONFIG_POST */
 // #ifdef CONFIG_BOOTCOUNT_LIMIT
 	/*if (bootlimit && (bootcount > bootlimit)) {

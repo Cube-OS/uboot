@@ -176,6 +176,7 @@ int board_mmc_init(bd_t *bd)
 #endif
 	{
 		debug("Using default SD card\n");
+        printf("Using default SD card\n");
 		/* Turn on the SD0 power pin - value must be LOW */
 		at91_set_pio_output(AT91_PIO_PORTB, 6, 0);
 	}

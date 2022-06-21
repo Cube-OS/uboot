@@ -193,18 +193,9 @@
 #define LARGE_SECT_SIZE   0x10000
 
 #define CONFIG_BOOTCOMMAND \
-	"bootcmd = mmc slot 0; " \
-		"if mmc bootlimitcheck; then " \
-			"if mmc rescan; then " \
-				"run mmc_boot; " \
-			"else " \
-				"mmc slot 1; " \
-				"if mmc rescan; then " \
-					"run mmc_boot; " \
-				"else " \
-					"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
-				"fi; " \
-			"fi; " \
+	"if mmc bootlimitcheck; then " \
+		"if mmc rescan; then " \
+			"run mmc_boot; " \
 		"else " \
 			"mmc slot 1; " \
 			"if mmc rescan; then " \
@@ -213,6 +204,14 @@
 				"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
 			"fi; " \
 		"fi; " \
+	"else " \
+		"mmc slot 1; " \
+		"if mmc rescan; then " \
+			"run mmc_boot; " \
+		"else " \
+			"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
+		"fi; " \
+	"fi; " \
 
 /* Define the initial console connection and rootfs location */
 #define CONFIG_BOOTARGS							\
