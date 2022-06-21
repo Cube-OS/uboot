@@ -330,6 +330,8 @@ const char *bootdelay_process(void)
 // #endif /* CONFIG_BOOTCOUNT_LIMIT */
 	s = getenv("bootcmd");
 
+	printf("bootcmd = %s\n",s);
+
 	process_fdt_options(gd->fdt_blob);
 	stored_bootdelay = bootdelay;
 

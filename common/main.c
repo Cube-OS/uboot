@@ -60,7 +60,7 @@ void main_loop(void)
 	update_tftp(0UL, NULL, NULL);
 #endif /* CONFIG_UPDATE_TFTP */
 
-#if defined(CONFIG_UPDATE_KUBOS)
+/*#if defined(CONFIG_UPDATE_KUBOS)
 	if (update_kubos(KUBOS_UPGRADE) != KUBOS_ERR_NO_REBOOT)
 	{
 		/* 
@@ -71,7 +71,7 @@ void main_loop(void)
 		 * If everything didn't go well but we still hit this line,
 		 * it means we want to reboot and re-attempt the upgrade
 		 */
-		do_reset(NULL, 0, 0, NULL);
+		/*do_reset(NULL, 0, 0, NULL);
 	}
 #endif /* CONFIG_UPDATE_KUBOS */
 
