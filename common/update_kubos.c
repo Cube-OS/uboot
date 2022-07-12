@@ -381,7 +381,7 @@ int update_kubos(bool upgrade)
             }
 
             setenv(KUBOS_CURR_VERSION, file);
-            bootcount_store(0);
+            // bootcount_store(0);
         }
     }
     else
