@@ -192,7 +192,7 @@
 #define SMALL_SECT_SIZE   0x1000
 #define LARGE_SECT_SIZE   0x10000
 
-// #ifdef CONFIG_SD_SWITCH
+/* #ifdef CONFIG_SD_SWITCH
 // #define CONFIG_BOOTCOMMAND \
 // 	"if mmc rescan; then " \
 // 		"run mmc_boot; " \
@@ -209,14 +209,14 @@
 // 			"fi; " \
 // 		"fi; " \
 // 	"fi;"
-// // #else
+ // #else */
 #define CONFIG_BOOTCOMMAND	\
 	"if mmc rescan; then " \
 		"run mmc_boot; " \
 	"else " \
 		"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
 	"fi;"
-// #endif
+/* #endif */
 
 /* Define the initial console connection and rootfs location */
 #define CONFIG_BOOTARGS							\
