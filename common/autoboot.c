@@ -322,14 +322,14 @@ const char *bootdelay_process(void)
 	} else
 #endif /* CONFIG_POST */
 // #ifdef CONFIG_BOOTCOUNT_LIMIT
-	if (bootlimit && (bootcount > bootlimit)) {
+	if (bootcount > bootlimit) {
 		printf("Warning: Bootlimit (%u) exceeded. Using altbootcmd.\n",
 		       (unsigned)bootlimit);
 		s = getenv("altbootcmd");
-	} else
+	} else {
 // #endif /* CONFIG_BOOTCOUNT_LIMIT */
 		s = getenv("bootcmd");
-
+	}
 	process_fdt_options(gd->fdt_blob);
 	stored_bootdelay = bootdelay;
 
@@ -353,6 +353,7 @@ void autoboot_command(const char *s)
 		bootcount = bootcount_load();
 		bootcount++;
 		bootcount_store(bootcount);
+		printf("bootcount"%ul, bootcount);
 #endif /* CONFIG_BOOTCOUNT_LIMIT */
 
 		run_command_list(s, -1, 0);
