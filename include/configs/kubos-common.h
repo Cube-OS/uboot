@@ -44,7 +44,7 @@
 #define KUBOS_UPDATE_FILE  "kubos_updatefile"
 
 #define KUBOS_UPDATE_ARGS \
-	"altbootcmd=mmc slot 1; if mmc rescan; then run mmc_boot; else echo ERROR; fi; \0 "\ 
+	"altbootcmd=mmc slot 1; if mmc rescan; then run mmc_boot; else echo ERROR; fi;\0" \ 
 	"recovery_available=1\0" \
     "bootlimit=6\0" \
 	KUBOS_CURR_VERSION "=" KUBOS_BASE "\0" \

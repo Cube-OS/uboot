@@ -353,7 +353,7 @@ void autoboot_command(const char *s)
 		bootcount = bootcount_load();
 		bootcount++;
 		bootcount_store(bootcount);
-		printf("bootcount"%ul, bootcount);
+		printf("bootcount(%u)", (unsigned)bootcount);
 #endif /* CONFIG_BOOTCOUNT_LIMIT */
 
 		run_command_list(s, -1, 0);
