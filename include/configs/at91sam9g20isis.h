@@ -216,7 +216,7 @@
 	"else " \
 		"echo ERROR: Failed to boot. Unable to communicate with SD card; " \
 	"fi;"
-#endif
+// #endif
 
 /* Define the initial console connection and rootfs location */
 #define CONFIG_BOOTARGS							\
