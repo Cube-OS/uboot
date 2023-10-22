@@ -244,6 +244,19 @@ config SYS_EXTRA_OPTIONS
 	  configuration to Kconfig. Since this option will be removed sometime,
 	  new boards should not use this option.
 
+config SD_SWITCH
+	bool "Enable SD slot switching support"
+	help
+	  The old configuration infrastructure (= mkconfig + boards.cfg)
+	  provided the extra options field. If you have something like
+	  "HAS_BAR,BAZ=64", the optional options
+	    #define CONFIG_HAS
+	    #define CONFIG_BAZ	64
+	  will be defined in include/config.h.
+	  This option was prepared for the smooth migration from the old
+	  configuration to Kconfig. Since this option will be removed sometime,
+	  new boards should not use this option.
+
 config SYS_TEXT_BASE
 	depends on SPARC || ARC || X86 || ARCH_UNIPHIER || ARCH_ZYNQMP || \
 		(M68K && !TARGET_ASTRO_MCF5373L) || MICROBLAZE || MIPS
