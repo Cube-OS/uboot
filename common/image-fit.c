@@ -8,6 +8,7 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
+#define DEBUG
 
 #ifdef USE_HOSTCC
 #include "mkimage.h"
