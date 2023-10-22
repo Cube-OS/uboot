@@ -4,11 +4,13 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-
+#define LOG_DEBUG
 #include <common.h>
 #include <command.h>
 #include <console.h>
 #include <mmc.h>
+
+#define CONFIG_SD_SWITCH
 
 static int curr_device = -1;
 
@@ -426,6 +428,9 @@ static int do_mmc_dev(cmd_tbl_t *cmdtp, int flag,
 }
 
 #ifdef CONFIG_SD_SWITCH
+#define GET false
+#define SET true
+
 static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
               int argc, char * const argv[])
 {
@@ -436,11 +441,28 @@ static int do_mmc_slot(cmd_tbl_t *cmdtp, int flag,
         return CMD_RET_USAGE;
     }
 
-    if(set_mmc_slot(slot) != 0)
-    {
-        printf("Failed to set SD slot\n");
-        return CMD_RET_FAILURE;
-    }
+	if (argc == 1){
+		int rc = 0;
+		if ((rc = set_mmc_slot(slot,GET)) < 0){
+			printf("Failed to get SD slot from FRAM, rc %d\n", rc);
+		}else {
+			printf("Current SD slot on FRAM is %d\n", rc);
+		}
+	} else { //argc == 2
+		if(slot != '0' && slot != '1')
+		{
+			return CMD_RET_USAGE;
+		}
+
+
+		if(set_mmc_slot(slot,SET) != 0)
+		{
+			printf("Failed to set SD slot\n");
+			return CMD_RET_FAILURE;
+		}
+
+	}
+
 
     printf("Booting SD card slot has been updated. In order for these changes to take effect, the system must be rebooted\n");
     return CMD_RET_SUCCESS;

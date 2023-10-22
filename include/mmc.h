@@ -15,6 +15,7 @@
 #include <linux/compiler.h>
 #include <part.h>
 
+#define CONFIG_SD_SWITCH
 /* SD/MMC version bits; 8 flags, 8 major, 8 minor, 8 change */
 #define SD_VERSION_SD	(1U << 31)
 #define MMC_VERSION_MMC	(1U << 30)
@@ -580,7 +581,7 @@ int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr);
 int mmc_get_env_dev(void);
 
 #ifdef CONFIG_SD_SWITCH
-int set_mmc_slot(uint8_t slot);
+int set_mmc_slot(uint8_t slot, bool get_set);
 #endif
 
 struct pci_device_id;
