@@ -107,6 +107,7 @@ typedef struct global_data {
 	ulong video_top;		/* Top of video frame buffer area */
 	ulong video_bottom;		/* Bottom of video frame buffer area */
 #endif
+	int wdc; /*watchdog reset count for ISIS board??? Kubos made this */
 } gd_t;
 #endif
 

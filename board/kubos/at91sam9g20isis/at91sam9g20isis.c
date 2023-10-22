@@ -37,12 +37,12 @@ DECLARE_GLOBAL_DATA_PTR;
 
 #ifdef CONFIG_HW_WATCHDOG
 
-static int wdc;
+//static int wdc;
 
 void hw_watchdog_init(void)
 {
 	/* Mark watchdog pin as output */
-	wdc = 0;
+	gd->wdc = 0;
 	at91_set_pio_output(AT91_PIO_PORTA, 30, 1);
 }
 
@@ -50,7 +50,7 @@ void hw_watchdog_reset_count(int val)
 {
 	int i = 0;
 
-	if (wdc > val)
+	if (gd->wdc > val)
 	{
 
 		for (i = 0; i < 10; i++)
@@ -59,10 +59,10 @@ void hw_watchdog_reset_count(int val)
 			at91_set_pio_value(AT91_PIO_PORTA, 30, 1);
 		}
 
-		wdc = 0;
+		gd->wdc = 0;
 	}
 
-	wdc++;
+	gd->wdc = gd->wdc + 1;
 
 	return;
 }
@@ -75,7 +75,7 @@ void hw_watchdog_reset(void)
 
 void hw_watchdog_force(void)
 {
-	wdc = DEFAULT_WATCHDOG_COUNT + 1;
+	gd->wdc = DEFAULT_WATCHDOG_COUNT + 1;
 
 	hw_watchdog_reset();
 
